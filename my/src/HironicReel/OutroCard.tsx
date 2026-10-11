@@ -21,6 +21,7 @@ export const OutroCard: React.FC = () => {
         style={{
           alignItems: "center",
           justifyContent: "center",
+          paddingBottom: 200,
           color: "white",
           textAlign: "center",
         }}

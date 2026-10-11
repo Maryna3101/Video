@@ -22,6 +22,7 @@ export const IntroCard: React.FC = () => {
         style={{
           alignItems: "center",
           justifyContent: "center",
+          paddingBottom: 200,
           color: "white",
           textAlign: "center",
           // Clear the type before the cross-fade so it dips through black

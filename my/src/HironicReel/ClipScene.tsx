@@ -16,6 +16,10 @@ type ClipSceneProps = {
   readonly playbackRate: number;
   readonly chapter?: string;
   readonly title?: string;
+  // The footage is inset so its baked-in text clears the Reels UI
+  // (top bar, right-hand buttons, bottom caption area).
+  readonly scaleFrom: number;
+  readonly scaleTo: number;
 };
 
 // A slowed-down section of the source reel with a gentle push-in and an
@@ -25,6 +29,8 @@ export const ClipScene: React.FC<ClipSceneProps> = ({
   playbackRate,
   chapter,
   title,
+  scaleFrom,
+  scaleTo,
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -33,12 +39,17 @@ export const ClipScene: React.FC<ClipSceneProps> = ({
     <AbsoluteFill style={{ backgroundColor: "black" }}>
       <AbsoluteFill
         style={{
-          scale: interpolate(frame, [0, durationInFrames], [1, 1.06], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.33, 0, 0.67, 1),
-            output: "perceptual-scale",
-          }),
+          scale: interpolate(
+            frame,
+            [0, durationInFrames],
+            [scaleFrom, scaleTo],
+            {
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
+              easing: Easing.bezier(0.33, 0, 0.67, 1),
+              output: "perceptual-scale",
+            },
+          ),
         }}
       >
         <Video
@@ -50,20 +61,22 @@ export const ClipScene: React.FC<ClipSceneProps> = ({
           objectFit="cover"
           style={{ position: "absolute", width: "100%", height: "100%" }}
         />
+        {/* Feather the inset frame's edges into the black background. */}
+        <AbsoluteFill style={{ boxShadow: "inset 0 0 90px 50px black" }} />
       </AbsoluteFill>
       {title ? (
         <>
           <AbsoluteFill
             style={{
               background:
-                "linear-gradient(180deg, rgba(0,0,0,0) 62%, rgba(0,0,0,0.92) 86%)",
+                "linear-gradient(180deg, rgba(0,0,0,0) 66%, rgba(0,0,0,0.9) 78%)",
             }}
           />
           <AbsoluteFill
             style={{
               justifyContent: "flex-end",
               alignItems: "center",
-              paddingBottom: 300,
+              paddingBottom: 430,
               color: "white",
               textAlign: "center",
             }}
