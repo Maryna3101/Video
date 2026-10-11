@@ -3,7 +3,6 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
-  random,
   Sequence,
   staticFile,
   useCurrentFrame,
@@ -11,8 +10,10 @@ import {
 } from "remotion";
 import {
   beatPulse,
+  bump,
   BUTTON_IN,
   decay,
+  flipBump,
   flipPulse,
   LAYOUT_END,
   LAYOUT_START,
@@ -27,7 +28,7 @@ const CARDS_BIG = { x: 540, y: 808 };
 const CARDS_SMALL = { x: 379, y: 485 };
 
 // Adds energy on top of the original "1 day left" countdown: beat-synced
-// camera punches, a shake + burst on "01", glow and shines.
+// soft camera pushes, a burst on "01", glow and shines.
 export const DayLeftReel: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -37,12 +38,8 @@ export const DayLeftReel: React.FC = () => {
   } as const;
 
   const hit = decay(frame, ONE_HIT, 7);
-  const shake = decay(frame, ONE_HIT, 5) * 18;
-  const punch =
-    1 +
-    flipPulse(frame) * 0.035 +
-    hit * 0.08 +
-    (frame > ONE_HIT + 10 ? beatPulse(frame, 4) * 0.014 : 0);
+  // Gentle camera moves only: eased pushes on the flips and on "01".
+  const punch = 1 + flipBump(frame) * 0.012 + bump(frame, ONE_HIT, 14) * 0.03;
 
   const glowX = interpolate(
     frame,
@@ -75,9 +72,8 @@ export const DayLeftReel: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: "black" }}>
       <AbsoluteFill
         style={{
-          // Slow push-in for constant motion, plus beat punches and shake.
-          scale: interpolate(frame, [0, 360], [1, 1.05], clamp) * punch,
-          translate: `${(random(`sx${frame}`) - 0.5) * shake}px ${(random(`sy${frame}`) - 0.5) * shake}px`,
+          // Slow push-in for constant motion, plus soft pushes on the hits.
+          scale: interpolate(frame, [0, 360], [1, 1.04], clamp) * punch,
         }}
       >
         <Video

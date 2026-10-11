@@ -23,7 +23,7 @@ export const OneHitBurst: React.FC<{ x: number; y: number }> = ({ x, y }) => {
         style={{
           backgroundColor: "rgb(255,240,210)",
           mixBlendMode: "screen",
-          opacity: interpolate(frame, [0, 1, 5], [0, 0.16, 0], clamp),
+          opacity: interpolate(frame, [0, 2, 10], [0, 0.08, 0], clamp),
         }}
       />
       {[0, 6].map((delay) => (

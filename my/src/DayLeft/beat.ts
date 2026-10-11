@@ -22,5 +22,22 @@ export const beatPulse = (frame: number, length = 4) => {
   return decay(frame, last, length);
 };
 
+// Like decay(), but eases up over a few frames instead of jumping, so
+// camera moves read as a soft push rather than a jolt.
+export const bump = (
+  frame: number,
+  hit: number,
+  length: number,
+  attack = 5,
+) => {
+  if (frame < hit - attack) return 0;
+  if (frame < hit)
+    return Math.sin(((frame - hit + attack) / attack) * (Math.PI / 2));
+  return Math.exp(-(frame - hit) / length);
+};
+
 export const flipPulse = (frame: number) =>
   Math.max(...FLIP_LANDINGS.map((hit) => decay(frame, hit, 5)));
+
+export const flipBump = (frame: number) =>
+  Math.max(...FLIP_LANDINGS.map((hit) => bump(frame, hit, 9)));
