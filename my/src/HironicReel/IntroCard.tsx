@@ -36,10 +36,7 @@ export const IntroCard: React.FC = () => {
         }}
       >
         <Reveal delay={4} rise={0}>
-          <Img
-            src={staticFile("hironic-logo.png")}
-            style={{ width: 300, mixBlendMode: "screen" }}
-          />
+          <Img src={staticFile("hironic-logo.png")} style={{ width: 300 }} />
         </Reveal>
         <Reveal delay={18} style={{ marginTop: 120 }}>
           <div
@@ -97,18 +94,6 @@ export const IntroCard: React.FC = () => {
             }}
           >
             Meet the Speakers
-          </div>
-        </Reveal>
-        <Reveal delay={64} style={{ marginTop: 26 }}>
-          <div
-            style={{
-              fontFamily: serif,
-              fontStyle: "italic",
-              fontSize: 44,
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            Online · Miglou & Synerjet Pro
           </div>
         </Reveal>
       </AbsoluteFill>

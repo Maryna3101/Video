@@ -27,10 +27,7 @@ export const OutroCard: React.FC = () => {
         }}
       >
         <Reveal delay={6} rise={0}>
-          <Img
-            src={staticFile("hironic-logo.png")}
-            style={{ width: 260, mixBlendMode: "screen" }}
-          />
+          <Img src={staticFile("hironic-logo.png")} style={{ width: 260 }} />
         </Reveal>
         <Reveal delay={14} style={{ marginTop: 110 }}>
           <div

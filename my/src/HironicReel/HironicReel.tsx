@@ -1,18 +1,17 @@
 import { Audio } from "@remotion/media";
 import { linearTiming, TransitionSeries } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
-import { slide } from "@remotion/transitions/slide";
 import {
   AbsoluteFill,
   interpolate,
   staticFile,
   useVideoConfig,
 } from "remotion";
-import { ClipScene } from "./ClipScene";
 import { IntroCard } from "./IntroCard";
 import { OutroCard } from "./OutroCard";
+import { SpeakerGrid } from "./SpeakerGrid";
 
-// 110 + 76 + 92 + 79 + 165 - 4 * 18 = 450 frames, matching the 15 s music bed.
+// 110 + 211 + 165 - 2 * 18 = 450 frames, matching the 15 s music bed.
 export const HironicReel: React.FC = () => {
   const { fps, durationInFrames } = useVideoConfig();
 
@@ -31,52 +30,11 @@ export const HironicReel: React.FC = () => {
           timing={linearTiming({ durationInFrames: 18 })}
         />
         <TransitionSeries.Sequence
-          name="Miglou speakers"
-          durationInFrames={76}
+          name="Speakers"
+          durationInFrames={211}
           premountFor={fps}
         >
-          <ClipScene
-            trimBefore={4.5 * fps}
-            playbackRate={0.75}
-            chapter="SESSION I"
-            title="Miglou"
-            scaleFrom={1}
-            scaleTo={1.03}
-          />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition
-          presentation={slide({ direction: "from-right" })}
-          timing={linearTiming({ durationInFrames: 18 })}
-        />
-        <TransitionSeries.Sequence
-          name="Synerjet Pro speakers"
-          durationInFrames={92}
-          premountFor={fps}
-        >
-          <ClipScene
-            trimBefore={7.5 * fps}
-            playbackRate={0.75}
-            chapter="SESSION II"
-            title="Synerjet Pro"
-            scaleFrom={1}
-            scaleTo={1.03}
-          />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition
-          presentation={fade()}
-          timing={linearTiming({ durationInFrames: 18 })}
-        />
-        <TransitionSeries.Sequence
-          name="Full line-up"
-          durationInFrames={79}
-          premountFor={fps}
-        >
-          <ClipScene
-            trimBefore={388}
-            playbackRate={0.75}
-            scaleFrom={1}
-            scaleTo={1.03}
-          />
+          <SpeakerGrid />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition
           presentation={fade()}
