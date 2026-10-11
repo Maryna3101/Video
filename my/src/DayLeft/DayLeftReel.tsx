@@ -19,7 +19,6 @@ import {
   ONE_HIT,
 } from "./beat";
 import { ButtonCall } from "./ButtonCall";
-import { GoldDust } from "./GoldDust";
 import { OneHitBurst } from "./OneHitBurst";
 import { Shine } from "./Shine";
 
@@ -28,7 +27,7 @@ const CARDS_BIG = { x: 540, y: 808 };
 const CARDS_SMALL = { x: 379, y: 485 };
 
 // Adds energy on top of the original "1 day left" countdown: beat-synced
-// camera punches, a shake + burst on "01", glow, gold dust and shines.
+// camera punches, a shake + burst on "01", glow and shines.
 export const DayLeftReel: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -131,7 +130,6 @@ export const DayLeftReel: React.FC = () => {
         />
         <ButtonCall />
       </AbsoluteFill>
-      <GoldDust />
       <Sequence
         name="01 burst"
         from={ONE_HIT}
