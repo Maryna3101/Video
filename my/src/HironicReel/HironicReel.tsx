@@ -40,8 +40,8 @@ export const HironicReel: React.FC = () => {
             playbackRate={0.75}
             chapter="SESSION I"
             title="Miglou"
-            scaleFrom={0.88}
-            scaleTo={0.92}
+            scaleFrom={1}
+            scaleTo={1.03}
           />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition
@@ -58,8 +58,8 @@ export const HironicReel: React.FC = () => {
             playbackRate={0.75}
             chapter="SESSION II"
             title="Synerjet Pro"
-            scaleFrom={0.88}
-            scaleTo={0.92}
+            scaleFrom={1}
+            scaleTo={1.03}
           />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition
@@ -74,8 +74,8 @@ export const HironicReel: React.FC = () => {
           <ClipScene
             trimBefore={388}
             playbackRate={0.75}
-            scaleFrom={0.78}
-            scaleTo={0.81}
+            scaleFrom={1}
+            scaleTo={1.03}
           />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition

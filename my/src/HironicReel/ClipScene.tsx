@@ -16,8 +16,7 @@ type ClipSceneProps = {
   readonly playbackRate: number;
   readonly chapter?: string;
   readonly title?: string;
-  // The footage is inset so its baked-in text clears the Reels UI
-  // (top bar, right-hand buttons, bottom caption area).
+  // Full-bleed 1080x1920 with a gentle push-in.
   readonly scaleFrom: number;
   readonly scaleTo: number;
 };
@@ -61,22 +60,20 @@ export const ClipScene: React.FC<ClipSceneProps> = ({
           objectFit="cover"
           style={{ position: "absolute", width: "100%", height: "100%" }}
         />
-        {/* Feather the inset frame's edges into the black background. */}
-        <AbsoluteFill style={{ boxShadow: "inset 0 0 90px 50px black" }} />
       </AbsoluteFill>
       {title ? (
         <>
           <AbsoluteFill
             style={{
               background:
-                "linear-gradient(180deg, rgba(0,0,0,0) 66%, rgba(0,0,0,0.9) 78%)",
+                "linear-gradient(180deg, rgba(0,0,0,0) 71%, rgba(0,0,0,0.9) 81%)",
             }}
           />
           <AbsoluteFill
             style={{
               justifyContent: "flex-end",
               alignItems: "center",
-              paddingBottom: 430,
+              paddingBottom: 370,
               color: "white",
               textAlign: "center",
             }}
